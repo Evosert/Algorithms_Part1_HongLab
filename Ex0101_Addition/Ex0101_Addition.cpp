@@ -7,8 +7,54 @@ using namespace std;
 string Add(string str1, string str2)
 {
 	// TODO:
+	int size = 0;
+	int gap = 0;
+	int carry = 0;
 
-	return string("0");
+	str1.size() > str2.size() ? size = str1.size() : size = str2.size();
+	str1.size() > str2.size() ? gap = str1.size() - str2.size() : gap = str2.size() - str1.size();
+	string str3 = string(size, '0');
+	string zero = string(gap, '0');
+
+	str2.insert(0, zero);
+
+	for (int i = size; i != 0; i--)
+	{
+		int temp = (str1[i - 1] - '0') + (str2[i - 1] - '0');
+		if (carry == 1)
+		{
+			if (temp + 1 >= 10)
+			{
+				carry = 1;
+				str3[i - 1] = (temp + 1) % 10 + '0';
+			}
+			else
+			{
+				carry = 0;
+				str3[i - 1] = (temp + 1) + '0';
+			}
+		}
+		else
+		{
+			if (temp >= 10)
+			{
+				carry = 1;
+				str3[i - 1] = temp % 10 + '0';
+			}
+			else
+			{
+				carry = 0;
+				str3[i - 1] = temp + '0';
+			}
+		}
+	}
+
+	if (carry == 1)
+	{
+		str3.insert(0, "1");
+	}
+
+	return str3;
 }
 
 int main()
