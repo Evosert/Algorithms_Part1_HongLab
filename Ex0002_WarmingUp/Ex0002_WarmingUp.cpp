@@ -10,6 +10,22 @@ int main()
 		string binary;
 
 		//TODO:
+		while (decimal > 0)
+		{
+			int i = decimal % 2;
+			auto s = string(1, '0');
+			s[0] = s[0] + i;
+			binary.insert(0, s);
+			decimal = decimal / 2;
+		}
+
+		// 정답
+		/*while (decimal > 0)
+		{
+			int r = decimal % 2;
+			binary = string(1, r + '0') + binary;
+			decimal /= 2;
+		}*/
 
 		cout << binary << endl; // 1101001
 	}
