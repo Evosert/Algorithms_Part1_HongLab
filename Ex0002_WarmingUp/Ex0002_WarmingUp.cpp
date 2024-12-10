@@ -59,6 +59,28 @@ int main()
 		string n = "789789";
 
 		// TODO:
+		while (n.size() > 1)
+		{
+			int sum = 0;
+			for (string::iterator i = n.begin(); i != n.end(); i++)
+			{
+				sum += *i - '0';
+			}
+			n = to_string(sum);
+		}
+
+		// 정답:
+		/*while (n.size() > 1)
+		{
+			int sum = 0;
+			while (n.size() > 0)
+			{
+				sum += (n[0] - '0') % 10;
+				n = n.substr(1, n.size() - 1);
+			}
+			cout << sum << endl;
+			n = to_string(sum);
+		}*/
 
 		cout << n << endl;
 	}
