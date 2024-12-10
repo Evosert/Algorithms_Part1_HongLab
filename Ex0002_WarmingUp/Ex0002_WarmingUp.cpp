@@ -35,6 +35,21 @@ int main()
 		string input = "Hello, World!";
 
 		// TODO:
+		string reverse;
+		for (string::iterator i = input.end(); i != input.begin(); i--)
+		{
+			reverse.push_back(*(i - 1));
+		}
+		input.swap(reverse);
+
+		// 정답:
+		/*int left = 0;
+		int right = input.size() - 1;
+		while (left < right) {
+			swap(input[left], input[right]);
+			left++;
+			right--;
+		}*/
 
 		cout << input << endl; // !dlroW ,olleH
 	}
