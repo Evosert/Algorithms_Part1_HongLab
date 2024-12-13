@@ -75,16 +75,19 @@ string KaratsubaHelper(string str1, string str2, int level) // level은 디버�
 
 	int mid = N / 2;
 
+	// 문제를 반으로 나누는 부분. n/2
 	string a = str1.substr(0, mid);
 	string b = str1.substr(mid, N - mid);
 
 	string c = str2.substr(0, mid);
 	string d = str2.substr(mid, N - mid);
 
+	// 절반크기 재귀 호출 3번
 	string ac = KaratsubaHelper(a, c, level + 1);
 	// TODO:
 	string bd = KaratsubaHelper(b, d, level + 1);
 	string temp = Subtract(KaratsubaHelper(Add(a, b), Add(c, d), level + 1), Add(ac, bd));
+	//
 
 	// 문자열 뒤에 '0'을 추가해서 10^N를 O(N)으로 처리
 	ac.append(string((N - mid) * 2, '0'));
