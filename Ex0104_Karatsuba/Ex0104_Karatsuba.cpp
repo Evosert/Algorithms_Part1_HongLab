@@ -83,12 +83,15 @@ string KaratsubaHelper(string str1, string str2, int level) // level은 디버�
 
 	string ac = KaratsubaHelper(a, c, level + 1);
 	// TODO:
+	string bd = KaratsubaHelper(b, d, level + 1);
+	string temp = Subtract(KaratsubaHelper(Add(a, b), Add(c, d), level + 1), Add(ac, bd));
 
 	// 문자열 뒤에 '0'을 추가해서 10^N를 O(N)으로 처리
 	ac.append(string((N - mid) * 2, '0'));
 	// TODO: ...
+	temp.append(string(N - mid, '0'));
 
-	// string result = TODO;
+	string result = Add(Add(ac, temp), bd);
 
 	// 디버깅 참고 (저는 하나하나 다 출력해보면서 디버깅합니다.)
 	//int ai = stoi(a);
@@ -103,8 +106,45 @@ string KaratsubaHelper(string str1, string str2, int level) // level은 디버�
 	// 주의: int 범위를 넘어가는 큰 숫자에 대해서는 사용할 수 없음
 	// assert(stoi(result) == stoi(str1) * stoi(str2));
 
-	return string("0"); // return result;
+	return result;
 }
+
+// 정답:
+//string KaratsubaHelper(string str1, string str2, int level) // level은 디버깅용
+//{
+//	cout << "Level " << level << " : " << str1 << " x " << str2 << endl;
+//
+//	int N = max(str1.size(), str2.size());
+//	str1.insert(0, string(N - str1.size(), '0'));
+//	str2.insert(0, string(N - str2.size(), '0'));
+//
+//	if (N == 1)
+//	{
+//		// 한 자리수는 바로 계산 
+//		// 이 부분이 실제로 몇 번 수행되는 지 세보는 것도 좋아요.
+//		string result = to_string(std::stoi(str1) * std::stoi(str2));
+//		return result;
+//	}
+//
+//	int mid = N / 2;
+//
+//	string a = str1.substr(0, mid);
+//	string b = str1.substr(mid, N - mid);
+//	string c = str2.substr(0, mid);
+//	string d = str2.substr(mid, N - mid);
+//
+//	string ac = KaratsubaHelper(a, c, level + 1);
+//	string bd = KaratsubaHelper(b, d, level + 1);
+//	string z = KaratsubaHelper(Add(a, b), Add(c, d), level + 1);
+//	string temp = Subtract(z, Add(ac, bd));
+//
+//	ac.append(string((N - mid) * 2, '0'));
+//	temp.append(string(N - mid, '0'));
+//
+//	string result = Add(Add(ac, temp), bd);
+//
+//	return result;
+//}
 
 string Karatsuba(string str1, string str2)
 {
