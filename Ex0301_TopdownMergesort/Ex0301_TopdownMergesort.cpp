@@ -47,15 +47,18 @@ private:
 
 		int i = lo, j = mid + 1;
 
+		if (a[mid] <= a[j]) // 최선의 경우
+			return;
+
 		for (int k = lo; k <= hi; k++)
 			aux[k] = a[k];
 
 		for (int k = lo; k <= hi; k++)
 		{
-			//if (i > mid) TODO;
-			//else if (j > hi) TODO;
-			//else if (aux[j] < aux[i]) TODO;
-			//else a[k] = TODO;
+			if (i > mid) a[k] = aux[j++];
+			else if (j > hi) a[k] = aux[i++];
+			else if (aux[j] < aux[i]) a[k] = aux[j++];
+			else a[k] = aux[i++];
 		}
 
 		cout << "After : ";
@@ -72,7 +75,9 @@ private:
 		int mid = lo + (hi - lo) / 2;
 
 		//TODO:
+		SortHelper(a, lo, mid);
 		//TODO:
+		SortHelper(a, mid + 1, hi);
 
 		Merge(a, lo, mid, hi);
 	}
