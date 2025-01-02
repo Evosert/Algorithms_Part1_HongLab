@@ -37,12 +37,62 @@ public:
 
 		int N = a.size();
 		// TODO: 재귀호출 사용하지 않습니다.
+		int i = 2;
+		int lo = 0;
+		int hi = 2;
+
+		while (i <= N)
+		{
+			lo = 0;
+			hi = i;
+
+			while (hi <= N)
+			{
+				Merge(a, lo, (lo + hi - 1) / 2, hi - 1);
+				lo = hi;
+				hi = hi + i;
+			}
+
+			i = i * 2;
+		}
 	}
+
+	// 정답
+	/*void Sort(vector<int>& a)
+	{
+		aux.resize(a.size());
+
+		int N = a.size();
+		for (int sz = 1; sz < N; sz = sz + sz)
+			for (int lo = 0; lo < N - sz; lo += sz + sz)
+				Merge(a, lo, lo + sz - 1, std::min(lo + sz + sz - 1, N - 1));
+	}*/
 
 private:
 	void Merge(vector<int>& a, int lo, int mid, int hi)
 	{
 		// TODO: Top-down과 동일
+		cout << "Before: ";
+		Print(a, lo, hi);
+
+		int i = lo, j = mid + 1;
+
+		if (a[mid] <= a[j]) // 최선의 경우
+			return;
+
+		for (int k = lo; k <= hi; k++)
+			aux[k] = a[k];
+
+		for (int k = lo; k <= hi; k++)
+		{
+			if (i > mid) a[k] = aux[j++];
+			else if (j > hi) a[k] = aux[i++];
+			else if (aux[j] < aux[i]) a[k] = aux[j++];
+			else a[k] = aux[i++];
+		}
+
+		cout << "After : ";
+		Print(a, lo, hi);
 	}
 
 	vector<int> aux; // 추가 메모리
