@@ -25,9 +25,38 @@ int main()
 	Print(arr);
 
 	// TODO:
+	for (int j = lo; j < hi; j++)
+	{
+		if (arr[j] <= x)
+		{
+			i += 1;
+			swap(arr[i], arr[j]);
+		}
+
+		cout << "i = " << i << ", j = " << j << endl;
+		Print(arr);
+	}
 
 	swap(arr[i + 1], arr[hi]);
 	Print(arr);
 
 	cout << i + 1 << endl; // 피벗 이하인 값들의 마지막 인덱스
+
+	// 참고
+	// 1. CLRS p.184 에서는 i를 -1에서 시작하는데, i = 0에서 시작하는 방식으로 구현하면 더하기를 줄일 수 있다.
+
+	/*int i = lo;
+	for (int j = lo; j < hi; j++)
+		if (arr[j] <= x)
+		{
+			swap(arr[i], arr[j]);
+			i += 1;
+		}
+	swap(arr[i], arr[hi]);
+	cout << i << endl;*/
+
+	// CLRS 교재에서는 1-based index를 사용한다는 점 주의.
+
+	// 2. 스탠퍼드 CS161에서 제공하는 파이썬 구현에서는 분할된 리스트 두 개를 반환하는 방식으로 구현되어 있다.
+	// 알고리듬의 개념을 이해할 때는 더 직관적일 수도 있는데, 실무에 쓰기에는 비효율적이다.
 }
