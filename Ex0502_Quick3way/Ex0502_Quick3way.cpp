@@ -28,18 +28,76 @@ void Quick3way(vector<int>& arr, int lo, int hi)
 	if (hi <= lo) return;
 
 	int lt = lo, i = lo + 1, gt = hi;
-	int v = arr[lo];
+	int key = arr[lo];
 
-	//while (i <= gt)
-	//{
-	//	// TODO:
-	//}
+	cout << "Key = " << key << endl;
+
+	while (i <= gt)
+	{
+		// TODO:
+		if (arr[i] < key)
+		{
+			swap(arr[lt++], arr[i]);
+		}
+		else if (arr[i] > key)
+		{
+			while (true)
+			{
+				if (arr[gt] > key)
+				{
+					gt--;
+				}
+				else if (arr[gt] < key)
+				{
+					swap(arr[i], arr[gt--]);
+					swap(arr[lt++], arr[i]);
+					break;
+				}
+				else if (arr[gt] == key)
+				{
+					swap(arr[i], arr[gt--]);
+					break;
+				}
+			}
+		}
+		i++;
+	}
 
 	Print(arr, lo, hi);
 
-	//Quick3way(arr, lo, lt - 1);
-	//Quick3way(arr, gt + 1, hi);
+	Quick3way(arr, lo, lt - 1);
+	Quick3way(arr, gt + 1, hi);
 }
+
+//정답: 
+//void Quick3way(vector<int>& arr, int lo, int hi)
+//{
+//	if (hi <= lo) return;
+//
+//	int lt = lo, i = lo + 1, gt = hi;
+//	int key = arr[lo];
+//
+//	cout << "Key = " << key << endl;
+//
+//	while (i <= gt)
+//	{
+//		if (arr[i] < key) {
+//			swap(arr[lt], arr[i]);
+//			lt += 1;
+//			i += 1;
+//		}
+//		else if (arr[i] > key) {
+//			swap(arr[i], arr[gt]);
+//			gt -= 1;
+//		}
+//		else i += 1;
+//	}
+//
+//	Print(arr, lo, hi);
+//
+//	Quick3way(arr, lo, lt - 1);
+//	Quick3way(arr, gt + 1, hi);
+//}
 
 int main()
 {
