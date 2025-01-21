@@ -25,6 +25,14 @@ vector<int> CountingSort(const vector<int>& arr, int k)
 	vector<int> count(k + 1, 0); // 0이상 k이하니까 k + 1개를 0으로 초기화
 
 	// TODO:
+	for (int i = 0; i < arr.size(); i++)
+	{
+		count[arr[i]]++;
+	}
+	for (int i = 1; i < count.size(); i++)
+	{
+		count[i] = count[i] + count[i - 1];
+	}
 
 	cout << "Count: ";
 	Print(count);
@@ -35,6 +43,8 @@ vector<int> CountingSort(const vector<int>& arr, int k)
 	for (int i = output.size() - 1; i >= 0; i--)
 	{
 		// TODO:
+		count[arr[i]]--;
+		output[count[arr[i]]] = arr[i];
 
 		cout << "Count: ";
 		Print(count);
@@ -45,6 +55,39 @@ vector<int> CountingSort(const vector<int>& arr, int k)
 
 	return output;
 }
+
+//정답:
+//vector<int> CountingSort(const vector<int>& arr, int k)
+//{
+//	vector<int> count(k + 1, 0); // k + 1개를 0으로 초기화
+//
+//	for (auto a : arr)
+//		count[a] += 1; // 개수 세기
+//	for (int i = 1; i < count.size(); i++)
+//		count[i] += count[i - 1];
+//
+//	cout << "Count: ";
+//	Print(count);
+//
+//	vector<int> output(arr.size(), -1); // -1로 초기화하는 것은 디버깅용
+//
+//	// 역순으로 복사
+//	for (int i = output.size() - 1; i >= 0; i--)
+//	{
+//		output[count[arr[i]] - 1] = arr[i];
+//		count[arr[i]]--;
+//
+//
+//		cout << "Count: ";
+//		Print(count);
+//
+//
+//		cout << "Output: ";
+//		Print(output);
+//	}
+//
+//	return output;
+//}
 
 int main()
 {
