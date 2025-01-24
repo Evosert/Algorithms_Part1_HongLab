@@ -45,17 +45,67 @@ void BucketSort(vector<float>& arr, int num_buckets)
 	vector<vector<float>> buckets(num_buckets);
 
 	// TODO:
+	for (int i = 0; i < num_buckets; i++)
+	{
+		buckets[static_cast<int>(arr[i] * 10)].push_back(arr[i]);
+	}
 
 	cout << "Before sorting" << endl;
 	PrintBuckets(buckets);
 
 	// TODO:
+	for (int i = 0; i < num_buckets; i++)
+	{
+		InsertionSort(buckets[i]);
+	}
 
 	cout << "After sorting" << endl;
 	PrintBuckets(buckets);
 
 	// TODO:
+	int i = 0;
+	for (int j = 0; j < num_buckets; j++)
+	{
+		for (int k = 0; k < buckets[j].size(); k++)
+		{
+			arr[i] = buckets[j][k];
+			i++;
+		}
+	}
 }
+
+// 정답:
+//void BucketSort(vector<float>& arr, int num_buckets)
+//{
+//	vector<vector<float>> buckets(num_buckets);
+//
+//	for (auto& a : arr)
+//	{
+//		int i = int(num_buckets * a);
+//		buckets[i].push_back(a);
+//	}
+//
+//	cout << "Before sorting" << endl;
+//	PrintBuckets(buckets);
+//
+//	for (auto& b : buckets)
+//		InsertionSort(b);
+//
+//	cout << "After sorting" << endl;
+//	PrintBuckets(buckets);
+//
+//	int i = 0;
+//	for (auto& b : buckets)
+//	{
+//		if (b.size() > 0)
+//		{
+//			//std::copy(b.begin(), b.end(), arr.begin() + i);
+//			memcpy(&arr[i], &b[0], sizeof(b[0]) * b.size());
+//			i += int(b.size());
+//		}
+//	}
+//	// 2중 for문으로 하나하나 복사할 수도 있어요.
+//}
 
 int main()
 {
